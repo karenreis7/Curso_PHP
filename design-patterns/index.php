@@ -1,6 +1,11 @@
 <?php
 
-include_once ("conection.php"); 
+global $conn;
+include_once ("conection.php");
+include_once ("dao/CarDAO.php");
+
+$carDao = new CarDAO($conn);
+$cars = $carDao -> findAll();
 
 ?>
 
@@ -24,3 +29,9 @@ include_once ("conection.php");
     <input type="submit" value="Salvar">
 
 </form>
+
+<ul>
+    <?php foreach ($cars as $car): ?>
+    <li><?=$car -> getBrand()?> - <?=$car -> getKm() ?> - <?=$car -> getColor() ?></li>
+    <?php endforeach; ?>
+</ul>

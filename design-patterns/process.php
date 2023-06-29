@@ -6,13 +6,12 @@ include_once ("dao/CarDAO.php");
 
 $carDao = new CarDAO($conn);
 
-$marca = $_POST ["brand"];
+$brand = $_POST ["brand"];
 $km = $_POST ["km"];
 $color = $_POST ["color"];
 
 $newCar = new Car();
 
-$brand = [];
 $newCar -> setBrand($brand);
 $newCar -> setKm($km);
 $newCar -> setColor($color);

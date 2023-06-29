@@ -12,16 +12,16 @@ class CarDAO implements CarDAOinterface{
 
     public function findAll(){
         $cars = [];
-        $stmt = $this -> pdo -> query ("SELECT * FROM cars");
+        $stmt = $this -> conn-> query ("SELECT * FROM cars");
 
         $data = $stmt -> fetchAll();
 
-        foreach ($data as $car) {
+        foreach ($data as $item) {
             $car = new Car();
-            $car ->setId($car ["id"]);
-            $car ->setBrand($car ["brand"]);
-            $car ->setKm($car ["km"]);
-            $car ->setColor($car ["color"]);
+            $car ->setId($item ["id"]);
+            $car ->setBrand($item ["brand"]);
+            $car ->setKm($item ["km"]);
+            $car ->setColor($item ["color"]);
 
             $cars [] = $car;
         }
@@ -30,9 +30,9 @@ class CarDAO implements CarDAOinterface{
 
     public function create(Car $car){
     $stmt = $this -> conn -> prepare("INSERT INTO cars (brand, km, color) VALUES (:brand, :km, :color)");
-    $stmt ->bindParam(":brand", $car ->getBrand());
-    $stmt ->bindParam(":km", $car ->getKm());
-    $stmt ->bindParam(":color", $car ->getColor());
+    $stmt ->bindParam("brand", $car ->getBrand());
+    $stmt ->bindParam("km", $car ->getKm());
+    $stmt ->bindParam("color", $car ->getColor());
 
     $stmt -> execute();
     }
